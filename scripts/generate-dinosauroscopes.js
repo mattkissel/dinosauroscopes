@@ -3,7 +3,8 @@ const path  = require('path');
 const fetch = require('node-fetch');
 
 const GITHUB_TOKEN = process.env.GH_AI_TOKEN;
-const MODEL_URL    = "https://api.githubcopilot.com/v1/chat/completions";
+const MODEL_URL = "https://copilot-proxy.githubusercontent.com/v1/chat/completions";
+
 
 if (!GITHUB_TOKEN) {
   console.error("❌ GH_AI_TOKEN missing from environment");
