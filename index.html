@@ -92,20 +92,14 @@
 
             console.log(aiResp);
             // 2) pull out the actual chat text
-            let text;
-            if (typeof aiResp === "string")
-            { 
-                text = aiResp;
+              // New extraction logic for puter.js shape
+            const text = aiResp.message?.content
+                ?? aiResp.content
+                ?? (typeof aiResp === "string" ? aiResp : null);
+
+            if (!text) {
+                throw new Error("Unexpected AI response: " + JSON.stringify(aiResp));
             }
-            else if (aiResp.content) 
-            {
-                text = aiResp.content;
-            }
-            else if (aiResp.choices?.[0]?.message?.content) 
-            {
-                text = aiResp.choices[0].message.content;
-            }
-            else throw new Error("Unexpected AI response: " + JSON.stringify(aiResp));
 
             // 3) turn into JSON
             const jsonData = JSON.parse(text.trim());
