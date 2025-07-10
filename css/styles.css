@@ -1,0 +1,235 @@
+/* ── Base ───────────────────────────────────────────────────────── */
+body {
+  font-family: sans-serif;
+  max-width: 700px;
+  margin: auto;
+  padding: 2rem;
+  background: #f8f6ef;
+  color: #333;
+  line-height: 1.5;
+}
+
+h1, h2 {
+  color: #5a713b;
+}
+
+a.back-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: #6f9e4e;
+  text-decoration: none;
+  font-weight: bold;
+}
+a.back-link:hover {
+  text-decoration: underline;
+}
+
+.dino-image {
+  display: block;
+  margin: 1rem auto;
+  max-width: 300px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* ── Tabs & Buttons ─────────────────────────────────────────────── */
+.tabs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.tab {
+  padding: 0.6em 1.2em;
+  background: #fff;
+  color: #6f9e4e;
+  border: 2px solid #6f9e4e;
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.tab:hover { background: #eaf4e0; }
+.tab.active {
+  background: #6f9e4e;
+  color: #fff;
+}
+/* Dino dropdown styled like a tab */
+#dino-select {
+  padding: 0.5em;
+  border: 2px solid #6f9e4e;
+  border-radius: 8px;
+  background: #fff;
+  color: #6f9e4e;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#dino-select:hover { background: #eaf4e0; }
+
+
+button {
+  display: block;
+  margin: 2rem auto;
+  padding: 0.8rem 1.4rem;
+  background-color: #6f9e4e;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+button:hover {
+  transform: scale(1.05);
+  background-color: #5a843b;
+}
+
+/* ── Dino Menu ────────────────────────────────────────────────── */
+.dino-menu {
+  text-align: center;
+  margin: 2rem 0;
+}
+.dino-menu ul {
+  list-style: none;
+  padding: 0;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+}
+.dino-menu a {
+  text-decoration: none;
+  color: #fff;
+  background: #6f9e4e;
+  padding: 0.5em 1em;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+.dino-menu a:hover {
+  background: #5a843b;
+}
+
+/* ── Sections & Lists ──────────────────────────────────────────── */
+.panel {
+  display: none;
+}
+
+.panel.active {
+  display: block;
+}
+
+section {
+  margin-bottom: 2rem;
+}
+section h2 {
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 0.3rem;
+  margin-bottom: 1rem;
+}
+section ul {
+  list-style-type: disc;
+  margin-left: 1.2rem;
+}
+
+/* ── Omikuji ───────────────────────────────────────────────────── */
+.omikuji dt {
+  font-weight: bold;
+  margin-top: 1rem;
+}
+.omikuji dd {
+  margin: 0 0 0.8rem 1rem;
+}
+
+
+/*-- Quiz -------------------------*/
+/* Quiz Container */
+.quiz-container {
+  display: grid;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* Each Question Card */
+.quiz-question {
+  background: #fff;
+  border: 2px solid #6f9e4e;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.quiz-question h3 {
+  margin: 0 0 0.75rem;
+  color: #5a713b;
+}
+
+/* Custom Radio Buttons */
+.quiz-question label {
+  display: block;
+  position: relative;
+  padding-left: 2rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+  color: #333;
+}
+/* Hide the browser’s default radio circle */
+label input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Base egg shape */
+.radio-mark {
+  display: inline-block;
+  width: 30px;
+  height: 40px;
+  margin-right: 8px;
+  vertical-align: middle;
+
+  background-color: #f7e7c6;       /* off-white shell */
+  border: 2px solid #d1bfa7;      /* subtle outline */
+  border-radius: 50% 50% 45% 45%; /* top-heavy, bottom-narrow */
+  transition: background-image 0.3s;
+}
+
+
+/* Spotted pattern when “filled in” */
+label input[type="radio"]:checked + .radio-mark {
+  background-color: #f7e7c6;
+  background-image:
+    radial-gradient(circle at 25% 30%, #a4744576 0 4px, transparent 5px),
+    radial-gradient(circle at 65% 35%, #a4744576 0 3px, transparent 4px),
+    radial-gradient(circle at 45% 60%, #a4744576 0 5px, transparent 6px),
+    radial-gradient(circle at 70% 75%, #a4744576 0 3px, transparent 4px),
+    radial-gradient(circle at 95% 90%, #a4744576 0 4px, transparent 5px),
+    radial-gradient(circle at 95% 20%, #a4744576 0 4px, transparent 5px),
+    radial-gradient(circle at -10% 60%, #a4744576 0 7px, transparent 8px),
+    radial-gradient(circle at 35% 85%, #a4744576 0 1px, transparent 2px);
+  box-shadow: inset 0 0 4px rgba(0,0,0,0.1);
+}
+
+.radio-mark:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 6px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.quiz-question .radio-mark::after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Submit Button Override */
+#submit-quiz {
+  margin-top: 1rem;
+}
+
+.dino-image{
+  max-width: 100%;
+}
