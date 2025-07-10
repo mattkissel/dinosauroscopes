@@ -1,7 +1,6 @@
 const fs      = require('fs');
 const path    = require('path');
 const fetch   = require('node-fetch');
-require('dotenv').config();
 
 const dinosaurs = [
   "Tyrannosaurus Rex","Triceratops","Stegosaurus","Velociraptor",
