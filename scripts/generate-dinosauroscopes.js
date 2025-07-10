@@ -3,7 +3,7 @@ const path  = require('path');
 const fetch = require('node-fetch');
 
 const GITHUB_TOKEN = process.env.GH_AI_TOKEN;
-const MODEL_URL = "https://copilot-proxy.githubusercontent.com/v1/chat/completions";
+const MODEL_URL = "https://api.githubcopilot.com/v1/chat/completions";
 
 
 if (!GITHUB_TOKEN) {
@@ -39,7 +39,7 @@ Return only valid JSON like:
       "Content-Type":  "application/json"
     },
     body: JSON.stringify({
-      model: "gpt-4",  // GitHub-hosted model
+      model: "gpt-4",
       messages: [{ role: "user", content: prompt }],
       temperature: 0.9,
       max_tokens: 1000
