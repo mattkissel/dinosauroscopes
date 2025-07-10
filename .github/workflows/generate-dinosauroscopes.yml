@@ -2,14 +2,12 @@ name: Generate Dinosauroscopes
 
 on:
   schedule:
-    # Runs every day at 00:20 UTC
-    - cron: '20 0 * * *'
+    - cron: '20 0 * * *'  # every day at 00:20 UTC
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -23,6 +21,8 @@ jobs:
         run: npm install node-fetch@2
 
       - name: Generate today’s dinosauroscopes
+        env:
+          GH_AI_TOKEN: ${{ secrets.GH_AI_TOKEN }}  # your GitHub token
         run: node ./scripts/generate-dinosauroscopes.js
 
       - name: Commit & push JSON
