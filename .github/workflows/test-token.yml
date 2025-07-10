@@ -1,0 +1,13 @@
+name: Test GitHub Token
+
+on:
+  workflow_dispatch:  # allows manual trigger
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Curl user identity
+        run: |
+          curl -H "Authorization: Bearer ${{ secrets.GH_AI_TOKEN }}" \
+               https://api.github.com/user
