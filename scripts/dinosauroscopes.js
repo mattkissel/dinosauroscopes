@@ -13,7 +13,7 @@ function getToday() {
       if (savedDate === today && savedData) {
         render(JSON.parse(savedData));
         document.getElementById("loading").style.display = "none";
-        console.log("saved data " + JSON.parse(savedData))
+        console.log("saved data " + savedData);
         return;
       }
 
@@ -72,7 +72,7 @@ function getToday() {
         const message = data[dino] || "🦕 No prophecy available.";
         const div = document.createElement("div");
         div.className = "dino";
-        div.innerHTML = `<h2>${dino}</h2><p>${message}</p>`;
+        div.innerHTML = `<h2><a href="dinosaurs/${dino.toLowerCase()}.html">${dino}</a></h2><p>${message}</p>`;
         container.appendChild(div);
       });
     }
