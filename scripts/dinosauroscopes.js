@@ -67,7 +67,7 @@ function getToday() {
     function render(data) {
       const container = document.getElementById("horoscope-container");
       container.innerHTML = "";
-      dinosaurs.forEach(dino => {
+      DINOS.forEach(dino => {
         const message = data[dino] || "🦕 No prophecy available.";
         const div = document.createElement("div");
         div.className = "dino";
