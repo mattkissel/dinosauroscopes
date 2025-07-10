@@ -70,49 +70,57 @@
         return;
       }
 
-      const prompt = `
-Generate a JSON object for dinosaur horoscopes dated ${today}.
-Each horoscope should reflect experiences that dinosaur species might have today.
-If today is Friday, focus on dinosaur romance.
-Use these keys: ${dinosaurs.join(", ")}.
-Return only valid JSON, e.g.:
-{
-  "date": "${today}",
-  "Tyrannosaurus Rex": "You may find unexpected companionship near the watering hole.",
-  ...
-}
-      `.trim();
+      
 
-    try {
-    document.getElementById("loading").style.display = "block";
-    const prompt = `…`;        // your existing prompt
+        try {
+            document.getElementById("loading").style.display = "block";
+            const prompt = `
+                Generate a JSON object for dinosaur horoscopes dated ${today}.
+                Each horoscope should reflect experiences that dinosaur species might have today.
+                If today is Friday, focus on dinosaur romance.
+                Use these keys: ${dinosaurs.join(", ")}.
+                Return only valid JSON, e.g.:
+                {
+                "date": "${today}",
+                "Tyrannosaurus Rex": "You may find unexpected companionship near the watering hole.",
+                ...
+                }
+                `.trim();
 
-    // 1) call puter.js
-    const aiResp = await puter.ai.chat(prompt, { model: "gpt-4.1-nano" });
+            // 1) call puter.js
+            const aiResp = await puter.ai.chat(prompt, { model: "gpt-4.1-nano" });
 
-    // 2) pull out the actual chat text
-    let text;
-    if (typeof aiResp === "string") text = aiResp;
-    else if (aiResp.content) text = aiResp.content;
-    else if (aiResp.choices?.[0]?.message?.content) {
-        text = aiResp.choices[0].message.content;
-    }
-    else throw new Error("Unexpected AI response: " + JSON.stringify(aiResp));
+            console.log(aiResp);
+            // 2) pull out the actual chat text
+            let text;
+            if (typeof aiResp === "string")
+            { 
+                text = aiResp;
+            }
+            else if (aiResp.content) 
+            {
+                text = aiResp.content;
+            }
+            else if (aiResp.choices?.[0]?.message?.content) 
+            {
+                text = aiResp.choices[0].message.content;
+            }
+            else throw new Error("Unexpected AI response: " + JSON.stringify(aiResp));
 
-    // 3) turn into JSON
-    const jsonData = JSON.parse(text.trim());
+            // 3) turn into JSON
+            const jsonData = JSON.parse(text.trim());
 
-    // 4) cache + render
-    localStorage.setItem("dinoHoroscopes", JSON.stringify(jsonData));
-    localStorage.setItem("dinoDate", getToday());
-    render(jsonData);
-    }
-    catch (err) {
-    console.error("Failed to generate horoscopes", err);
-    }
-    finally {
-    document.getElementById("loading").style.display = "none";
-    }
+            // 4) cache + render
+            localStorage.setItem("dinoHoroscopes", JSON.stringify(jsonData));
+            localStorage.setItem("dinoDate", getToday());
+            render(jsonData);
+        }
+        catch (err) {
+            console.error("Failed to generate horoscopes", err);
+        }
+        finally {
+            document.getElementById("loading").style.display = "none";
+        }
 
     }
 
