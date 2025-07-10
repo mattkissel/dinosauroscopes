@@ -1,8 +1,6 @@
 import fs   from 'fs';
 import path from 'path';
 import fetch from 'node-fetch';
-import dotenv from 'dotenv';
-dotenv.config();
 
 const dinosaurs = [
   "Tyrannosaurus Rex","Triceratops","Stegosaurus","Velociraptor",
@@ -14,11 +12,12 @@ async function main() {
   const today  = new Date().toISOString().split('T')[0];
   const prompt = `
 Generate a JSON object for dinosaur horoscopes dated ${today}.
+
 All of the horoscopes should have content related to the dinosaur and things
 that could happen to it on the course of a day. On friday the horoscopes should
 be about the lovelife of the dinosaur.
 Use these keys exactly: ${dinosaurs.join(', ')}.
-Only return valid JSON, e.g.:
+Only return valid JSON, for example:
 {
   "date":"${today}",
   "Tyrannosaurus Rex":"…",
@@ -29,8 +28,7 @@ Only return valid JSON, e.g.:
   const res = await fetch("https://api.puter.com/v2/chat", {
     method: "POST",
     headers: {
-      "Content-Type":  "application/json",
-      Authorization: `Bearer ${process.env.PUTER_API_KEY}`
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({
       model:       "gpt-4.1-nano",
@@ -44,10 +42,10 @@ Only return valid JSON, e.g.:
   const text        = choices[0].message.content.trim();
   const data        = JSON.parse(text);
 
-  // Ensure date field
+  // ensure date field
   data.date = today;
 
-  // Write to /dinosauroscopes/YYYY-MM-DD.json
+  // write to /dinosauroscopes/YYYY-MM-DD.json
   const outDir = path.join(process.cwd(), "dinosauroscopes");
   if (!fs.existsSync(outDir)) fs.mkdirSync(outDir);
   fs.writeFileSync(
