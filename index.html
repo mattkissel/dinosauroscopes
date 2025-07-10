@@ -83,19 +83,37 @@ Return only valid JSON, e.g.:
 }
       `.trim();
 
-      try {
-        const response = await puter.ai.chat(prompt, { model: "gpt-4.1-nano" });
-        const jsonData = JSON.parse(response.trim());
-        localStorage.setItem("dinoHoroscopes", JSON.stringify(jsonData));
-        localStorage.setItem("dinoDate", today);
-        render(jsonData);
-      } catch (err) {
-        console.error("Failed to generate horoscopes", err);
-        document.getElementById("horoscope-container").textContent =
-          "Something went wrong. Try refreshing the page.";
-      } finally {
-        document.getElementById("loading").style.display = "none";
-      }
+    try {
+    document.getElementById("loading").style.display = "block";
+    const prompt = `…`;        // your existing prompt
+
+    // 1) call puter.js
+    const aiResp = await puter.ai.chat(prompt, { model: "gpt-4.1-nano" });
+
+    // 2) pull out the actual chat text
+    let text;
+    if (typeof aiResp === "string") text = aiResp;
+    else if (aiResp.content) text = aiResp.content;
+    else if (aiResp.choices?.[0]?.message?.content) {
+        text = aiResp.choices[0].message.content;
+    }
+    else throw new Error("Unexpected AI response: " + JSON.stringify(aiResp));
+
+    // 3) turn into JSON
+    const jsonData = JSON.parse(text.trim());
+
+    // 4) cache + render
+    localStorage.setItem("dinoHoroscopes", JSON.stringify(jsonData));
+    localStorage.setItem("dinoDate", getToday());
+    render(jsonData);
+    }
+    catch (err) {
+    console.error("Failed to generate horoscopes", err);
+    }
+    finally {
+    document.getElementById("loading").style.display = "none";
+    }
+
     }
 
     function render(data) {
