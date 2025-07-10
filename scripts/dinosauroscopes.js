@@ -13,6 +13,7 @@ function getToday() {
       if (savedDate === today && savedData) {
         render(JSON.parse(savedData));
         document.getElementById("loading").style.display = "none";
+        console.log("saved data " + JSON.parse(savedData))
         return;
       }
 
