@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dinosaur Horoscopes 🦕</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fdfcf8;
+      color: #333;
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .date {
+      text-align: center;
+      font-style: italic;
+      margin-bottom: 2rem;
+    }
+    .dino-horoscope {
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 1rem;
+    }
+    .dino-horoscope h2 {
+      font-size: 1.2rem;
+      color: #5c7b55;
+    }
+    .loading {
+      text-align: center;
+      color: #888;
+      margin-top: 2rem;
+    }
+  </style>
+
+  <!-- puter.js -->
+  <script src="https://js.puter.com/v2/"></script>
+</head>
+<body>
+  <h1>Dinosaur Horoscopes 🦖</h1>
+  <div class="date" id="today">Today is <span id="todays-date"></span></div>
+  <div id="horoscope-container"></div>
+  <div id="loading" class="loading" style="display:none;">
+    Fetching your dino destinies...
+  </div>
+
+  <script>
+    const dinosaurs = [
+      "Tyrannosaurus Rex", "Triceratops", "Stegosaurus", "Velociraptor",
+      "Brachiosaurus", "Ankylosaurus", "Spinosaurus", "Pachycephalosaurus",
+      "Dilophosaurus", "Allosaurus", "Iguanodon", "Carnotaurus"
+    ];
+
+    function getTodayString() {
+      return new Date().toISOString().split("T")[0];
+    }
+
+    async function fetchHoroscopesFromAI() {
+      const loading = document.getElementById("loading");
+      loading.style.display = "block";
+
+      const prompt = `
+Generate a JSON mapping of 12 dinosaur-themed daily horoscopes for the date ${getTodayString()}. 
+Use these keys: ${dinosaurs.join(", ")}. 
+Return valid JSON only.
+      `.trim();
+
+      try {
+        const aiResponse = await puter.ai.chat(prompt);
+        const data = JSON.parse(aiResponse.trim());
+
+        const container = document.getElementById("horoscope-container");
+        container.innerHTML = "";
+
+        for (const dino of dinosaurs) {
+          const div = document.createElement("div");
+          div.className = "dino-horoscope";
+          div.innerHTML = `
+            <h2>${dino}</h2>
+            <p>${data[dino] || "No fortune available today."}</p>
+          `;
+          container.appendChild(div);
+        }
+
+        localStorage.setItem("lastHoroscopeDate", data.date || getTodayString());
+      } catch (err) {
+        console.error("AI fetch error:", err);
+        document.getElementById("horoscope-container").textContent =
+          "Could not load horoscopes. Try refreshing.";
+      } finally {
+        loading.style.display = "none";
+      }
+    }
+
+    // Initialize page
+    const today = getTodayString();
+    var storedDate = document.getElementById("todays-date").textContent;
+    document.getElementById("todays-date").textContent = `${today}`;
+
+    //const storedDate = localStorage.getItem("lastHoroscopeDate");
+    if (storedDate !== today) {
+    console.log("fetching horoscopes");
+      fetchHoroscopesFromAI();
+    }
+  </script>
+</body>
+</html>

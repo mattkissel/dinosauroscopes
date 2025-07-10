@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dinosaur Horoscopes 🦕</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fdfcf8;
+      color: #333;
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .date {
+      text-align: center;
+      font-style: italic;
+      margin-bottom: 2rem;
+    }
+    .dinosauroscope {
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 1rem;
+    }
+    .dinosauroscope h2 {
+      font-size: 1.2rem;
+      color: #5c7b55;
+    }
+    .loading {
+      text-align: center;
+      color: #888;
+      margin-top: 2rem;
+    }
+  </style>
+
+  <!-- puter.js -->
+  <script src="https://js.puter.com/v2/"></script>
+</head>
+<body>
+  <h1>Dinosauroscopes 🦖</h1>
+  <div class="date" id="today">Today is <span id="todays-date"></span></div>
+  <div id="dinosauroscope-container"></div>
+  <div id="loading" class="loading" style="display:none;">
+    Fetching your dino destinies...
+  </div>
+
+  <script>
+    const dinosaurs = [
+      "Tyrannosaurus Rex", "Triceratops", "Stegosaurus", "Velociraptor",
+      "Brachiosaurus", "Ankylosaurus", "Spinosaurus", "Pachycephalosaurus",
+      "Dilophosaurus", "Allosaurus", "Iguanodon", "Carnotaurus"
+    ];
+
+  function getTodayString(){ return new Date().toISOString().split("T")[0]; }
+
+  async function loadHoroscopes() {
+    const today = getTodayString();
+    document.getElementById("today").textContent = `Today is ${today}`;
+
+    try {
+      const res  = await fetch(`/dinosauroscopes/${today}.json`);
+      if (!res.ok) throw new Error("Not found");
+
+      const data = await res.json();
+      render(data);
+    }
+    catch {
+      // Fallback if JSON missing
+      document.getElementById("dinosauroscope-container")
+        .textContent = "Dinosauroscopes not yet published. Check back soon!";
+    }
+  }
+
+  function render(data) {
+    const container = document.getElementById("dinosauroscope-container");
+    container.innerHTML = "";
+    dinosaurs.forEach(dino => {
+      const fortune = data[dino] || "Your fate is a mystery today.";
+      container.innerHTML += `
+        <div class="dinosauroscope">
+          <h2>${dino}</h2><p>${fortune}</p>
+        </div>`;
+    });
+  }
+
+  loadHoroscopes();
+
+  </script>
+</body>
+</html>
