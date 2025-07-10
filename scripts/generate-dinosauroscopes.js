@@ -1,6 +1,7 @@
-import fs   from 'fs';
-import path from 'path';
-import fetch from 'node-fetch';
+const fs      = require('fs');
+const path    = require('path');
+const fetch   = require('node-fetch');
+require('dotenv').config();
 
 const dinosaurs = [
   "Tyrannosaurus Rex","Triceratops","Stegosaurus","Velociraptor",
@@ -12,11 +13,9 @@ async function main() {
   const today  = new Date().toISOString().split('T')[0];
   const prompt = `
 Generate a JSON object for dinosaur horoscopes dated ${today}.
-
-All of the horoscopes should have content related to the dinosaur and things
-that could happen to it on the course of a day. On friday the horoscopes should
-be about the lovelife of the dinosaur.
+All horoscopes relate to the dinosaur’s daily life; on Fridays focus on love-life.
 Use these keys exactly: ${dinosaurs.join(', ')}.
+
 Only return valid JSON, for example:
 {
   "date":"${today}",
@@ -60,3 +59,6 @@ main().catch(err => {
   console.error(err);
   process.exit(1);
 });
+
+
+
