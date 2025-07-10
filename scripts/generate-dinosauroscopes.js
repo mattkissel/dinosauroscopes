@@ -36,12 +36,29 @@ Only return valid JSON, for example:
     })
   });
 
-  const { choices } = await res.json();
-  const text        = choices[0].message.content.trim();
-  const data        = JSON.parse(text);
+  const text = await res.text();
+
+  if (!res.ok) {
+    console.error(`❌ API returned HTTP ${res.status}\n${text}`);
+    process.exit(1);
+  }
+
+  let data;
+  try {
+    // If Puter really still uses `choices[0].message.content`
+    const payload = JSON.parse(text);
+    const content = payload.choices?.[0]?.message?.content?.trim();
+    data = JSON.parse(content);
+  }
+  catch (e) {
+    console.error("❌ Failed to parse JSON from API response:\n", text);
+    console.error(e);
+    process.exit(1);
+  }
 
   // ensure date field
   data.date = today;
+
 
   // write to /dinosauroscopes/YYYY-MM-DD.json
   const outDir = path.join(process.cwd(), "dinosauroscopes");
