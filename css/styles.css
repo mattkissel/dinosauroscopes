@@ -33,28 +33,52 @@ a.back-link:hover {
 }
 
 /* ── Tabs & Buttons ─────────────────────────────────────────────── */
+/* ── Improved Tab Styling ──────────────────────────────────────── */
 .tabs {
   display: flex;
-  align-items: center;
+  align-items: flex-end; /* Align to bottom */
   justify-content: center;
   gap: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  position: relative;
 }
+
+.tabs::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #6f9e4e;
+  z-index: 0;
+}
+
 .tab {
   padding: 0.6em 1.2em;
   background: #fff;
   color: #6f9e4e;
   border: 2px solid #6f9e4e;
-  border-bottom: none;
+  /* border-bottom: none; */
   border-radius: 8px 8px 0 0;
   font-weight: bold;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.2s;
+  position: relative;
+  z-index: 1;
 }
-.tab:hover { background: #eaf4e0; }
+
+.tab:hover {
+  background: #eaf4e0;
+}
+
 .tab.active {
   background: #6f9e4e;
   color: #fff;
+  font-size:1.3em;
+  border:none;
+  border-bottom: 2px solid #f8f6ef; /* Matches body background */
+  margin-bottom: -2px;
 }
 /* Dino dropdown styled like a tab */
 #dino-select {
@@ -64,6 +88,7 @@ a.back-link:hover {
   background: #fff;
   color: #6f9e4e;
   font-weight: bold;
+  font-size:large;
   cursor: pointer;
   transition: background 0.2s;
 }

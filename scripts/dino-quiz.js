@@ -72,14 +72,14 @@ const QUESTIONS = [
       { t: "Run for mayor, or president - after all your only competition is a bunch of other dinosaurs",                     map: ["Gallimimus","Parasaurolophus"] },
       { t: "Move to New Jersey because the rent is too damn high",              map: ["Ankylosaurus","Pachycephalosaurus"] },
       { t: "Feather couture runway.",                                           map: ["Archaeopteryx","Gallimimus"] },
-      { t: "Poop in Central Park and blame it on the nearest Chihuahua",        map: ["Apatosaurus",] },
+      { t: "Poop in Central Park and blame it on the nearest chihuahua",        map: ["Apatosaurus",] },
       { t: "Go to the Bronx Zoo for a feast",                                   map: ["Velociraptor","Therizinosaurus"] },
       { t: "Visit old friends in the Museum of Natural History",                map: ["Triceratops","Stegosaurus"] }
       
     ]
   },
   {
-    q: "7. Your best friend Ducky, is being chased by a pack of Utahraptors, what do you do?:",
+    q: "7. Your best friend Ducky, is being chased by a pack of Utahraptors, what do you do?",
     choices: [
       { t: "Jump in front of her to protect her from attack.",                                        map: ["Ankylosaurus","Stegosaurus"] },
       { t: "You don't stand a chance, you start running alongside Ducky",                             map: ["Archaeopteryx","Gallimimus"] },
@@ -105,7 +105,7 @@ const QUESTIONS = [
       { t: "Jock - top of the food chain baby.",                       map: ["Allosaurus", "Gallimimus"] },
       { t: "Theater Kid or Band Geek.",                                  map: ["Parasaurolophus","Archaeopteryx"] },
       { t: "Punk / Goth.",                          map: ["Stegosaurus", "Triceratops"] },
-      { t: "Popular Kids.",                          map: ["Velociraptor"] },
+      { t: "Popular Kid.",                          map: ["Velociraptor"] },
       { t: "Nerd.",                                 map: ["Apatosaurus", "Pachycephalosaurus"] },
       { t: "Stoner.",                               map: ["Therizinosaurus", "Ankylosaurus"] },
       { t: "Loner.",                                map: ["Spinosaurus"] }
