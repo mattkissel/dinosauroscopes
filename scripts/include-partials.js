@@ -6,7 +6,7 @@ const DINOS = [
 ];
 
 // Load nav and THEN attach behaviors
-fetch("/nav.html")
+fetch("nav.html")
   .then(res => res.text())
   .then(html => {
     document.getElementById("main-nav").innerHTML = html;
