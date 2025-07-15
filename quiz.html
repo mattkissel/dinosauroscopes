@@ -10,7 +10,7 @@
 <div id="main-nav"></div>
 
 <!-- Horoscope Tab -->
-  <div id="horoscope" class="panel active">
+  <div id="horoscope" class="panel">
     <div id="today"></div>
     <div id="horoscope-container"></div>
     <div id="loading" class="loading">Loading your horoscopes…</div>
@@ -20,36 +20,18 @@
   </div>
 
   <!-- Quiz Tab -->
-  <div id="quiz" class="panel">
+  <div id="quiz" class="panel active">
     <form id="dino-quiz" class="quiz-container"></form>
     <button id="submit-quiz">Find My Dino!</button>
 
     <div id="quiz-result" class="result"></div>
   </div>
-<div id="dino-info" class="panel">
-  <div id="dino-content">
-    <p style="text-align:center; margin-top:2rem;">Choose a dinosaur to view their destiny.</p>
-  </div>
-</div>
 
-    <script>
-
-
-    document.querySelectorAll('.tab').forEach(tab => {
-    tab.onclick = () => {
-      document.querySelectorAll('.tab, .panel').forEach(el=>el.classList.remove('active'));
-      tab.classList.add('active');
-      document.getElementById(tab.dataset.tab).classList.add('active');
-    };
-  });
-  </script>
-
-
+<script src="/scripts/include-partials.js"></script>
+<script src="scripts/dino-quiz.js"></script> 
+<script src="scripts/dinosauroscopes.js"></script> 
  
 
 
 </body>
-<script src="/scripts/include-partials.js"></script>
-<script src="scripts/dino-quiz.js"></script> 
-<script src="scripts/dinosauroscopes.js"></script> 
 </html>
