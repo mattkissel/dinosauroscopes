@@ -66,15 +66,31 @@ function getToday() {
     }
 
     function render(data) {
-      const container = document.getElementById("horoscope-container");
-      container.innerHTML = "";
-      DINOS.forEach(dino => {
-        const message = data[dino] || "🦕 No prophecy available.";
-        const div = document.createElement("div");
-        div.className = "dino";
-        div.innerHTML = `<h2><a href="dinosaurs/${dino.toLowerCase()}.html">${dino}</a></h2><p>${message}</p>`;
-        container.appendChild(div);
-      });
+  const container = document.getElementById("horoscope-container");
+  container.innerHTML = "";
+  DINOS.forEach(dino => {
+    const message = data[dino] || "🦕 No prophecy available.";
+    const div = document.createElement("div");
+    div.className = "dino";
+
+    const dinoId = dino.toLowerCase();
+    div.innerHTML = `
+      <h2>
+        <button class="dino-link" data-url="dinosaurs/${dinoId}.html">${dino}</button>
+      </h2>
+      <p>${message}</p>
+    `;
+    container.appendChild(div);
+  });
+
+  // Attach click handlers to new buttons
+  container.querySelectorAll('.dino-link').forEach(btn => {
+    btn.addEventListener('click', async (event) => {
+      event.preventDefault();
+      const url = btn.dataset.url;
+      await loadDinoPage(url);
+    });
+  });
     }
 
     getHoroscopes();

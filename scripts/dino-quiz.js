@@ -172,13 +172,23 @@ const QUESTIONS = [
     console.log("you got "+ you);
     // show result
     const resultDiv = document.getElementById('quiz-result');
+    const dinoId = you.toLowerCase();
     resultDiv.innerHTML = `
-      <h2>You are… <a href="dinosaurs/${you.toLowerCase()}.html"><em>${you}</em></a>!</h2>
-      <a href="dinosaurs/${you.toLowerCase()}.html">
-      <img src="images/${you.toLowerCase()}.png"
-           alt="${you}" class="dino-image" onerror="this.src='images/placeholder.png'"></a>
+      <h2>You are… <button class="dino-link" data-url="dinosaurs/${dinoId}.html"><em>${you}</em></button>!</h2>
+      <button class="dino-link" data-url="dinosaurs/${dinoId}.html">
+        <img src="images/${dinoId}.png"
+            alt="${you}" class="dino-image" onerror="this.src='images/placeholder.png'">
+      </button>
       <p>Embrace your ${you} spirit today.</p>
     `;
+    // Attach dynamic loading behavior to result buttons
+    resultDiv.querySelectorAll('.dino-link').forEach(btn => {
+      btn.addEventListener('click', async (event) => {
+        event.preventDefault();
+        const url = btn.dataset.url;
+        await loadDinoPage(url);
+      });
+    });
     // switch to result view
     form.style.display = 'none';
     document.getElementById('submit-quiz').style.display = 'none';

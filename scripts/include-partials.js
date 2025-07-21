@@ -1,3 +1,4 @@
+window.loadDinoPage = loadDinoPage;
 const DINOS = [
   "Allosaurus","Ankylosaurus","Apatosaurus","Archaeopteryx",
   "Gallimimus","Pachycephalosaurus","Parasaurolophus",
@@ -32,23 +33,32 @@ fetch("nav.html")
           return;
         }
 
-        // Switch to dino tab
-        document.querySelectorAll('.tab, .panel').forEach(el => el.classList.remove('active'));
-        document.querySelector('[data-tab="dino"]')?.classList.add('active');
-        document.getElementById("dino-info")?.classList.add('active');
-
-        try {
-          const res = await fetch(url);
-          const html = await res.text();
-          const bodyContent = html.match(/<body[^>]*>([\s\S]*)<\/body>/i)?.[1] ?? html;
-          document.getElementById("dino-content").innerHTML = bodyContent;
-        } catch (err) {
-          console.error("Failed to load dinosaur page:", err);
-          document.getElementById("dino-content").innerHTML = "<p>Failed to load dino destiny.</p>";
-        }
-        // Optional: reset dropdown so it doesn't auto-trigger again
-        select.value = "#";
+        await loadDinoPage(url);
+        select.value = "#"; // reset dropdown
 
       });
     }
   });
+
+
+async function loadDinoPage(url) {
+  if (!url.endsWith(".html")) {
+    console.log("Invalid dinosaur URL:", url);
+    return;
+  }
+
+  // Switch to dino tab
+  document.querySelectorAll('.tab, .panel').forEach(el => el.classList.remove('active'));
+  document.querySelector('[data-tab="dino"]')?.classList.add('active');
+  document.getElementById("dino-info")?.classList.add('active');
+
+  try {
+    const res = await fetch(url);
+    const html = await res.text();
+    const bodyContent = html.match(/<body[^>]*>([\s\S]*)<\/body>/i)?.[1] ?? html;
+    document.getElementById("dino-content").innerHTML = bodyContent;
+  } catch (err) {
+    console.error("Failed to load dinosaur page:", err);
+    document.getElementById("dino-content").innerHTML = "<p>Failed to load dino destiny.</p>";
+  }
+}
