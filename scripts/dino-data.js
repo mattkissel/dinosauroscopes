@@ -1,12 +1,18 @@
-  // 🔥 Inject Love Language AFTER content is loaded
-const loveLanguages = {
-  "Carnivore": "You like your lovers like you like your prey. Meaty. You like to provide meat to your loved one(s). Also, lovely plumage",
-  "Omnivore": "You go both ways.",
-  "Nest making": "You are a great homemaker and enjoy time nestled up with loved ones.",
-  "Stargrazer": "You enjoy grazing the fields and watching the stars. No gifts required—just some meteor watching and chill.",
-  "Ruts for Butts": "Love is an active display. You roar, fight off rivals, and dance like nobody’s watching (except your mate).",
-  "Quality Time": "The meteor comes for us all. You savor every moment with loved ones because in the end, that's what matters."
-};
+const loveLanguages =
+{
+    "Carnivore"     : `You like your lovers like you like your prey. 
+       <em>Meaty</em>. You like to provide meat to your loved one(s). Also, lovely plumage`,
+    "Omnivore"      : `You're a jack-of-all-love-languages and why not? People - I mean <em>dinosaurs</em> - aren't just one thing.
+        Also, You go both ways.`,
+    "Nest making"   : `You are a great homemaker and enjoy time nestled up with loved ones. But no need to rush into nesting. Don't forget your eggs can always be frozen in time and eventually cloned by a raging capitalist. What could go wrong?`,
+    "Stargrazer"    : `You enjoy nothing more than grazing the fields and looking up at 
+        the stars. Your love doesn't require bellows of affection, or presents of meat. You would be happy with some meteor watching and chill.`,
+    "Ruts for Butts" : `For you, love is an active display. You fight off other suitors, roar to get your loved one's attention,
+        and you dance like nobody's watching (except suitable mates). You like to toot your own horn`,
+    "Quality Time" : `The meteor comes for us all, it makes you want to spend time with your loved ones because in the end, that's all the matters. Memento mori`
+} ;
+
+
 
 const dinoLoveMap = {
   "Allosaurus": "Carnivore",
