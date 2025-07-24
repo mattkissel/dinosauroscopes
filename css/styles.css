@@ -160,14 +160,7 @@ section ul {
   margin-left: 1.2rem;
 }
 
-/* ── Omikuji ───────────────────────────────────────────────────── */
-.omikuji dt {
-  font-weight: bold;
-  margin-top: 1rem;
-}
-.omikuji dd {
-  margin: 0 0 0.8rem 1rem;
-}
+
 
 
 /*-- Quiz -------------------------*/
@@ -257,4 +250,18 @@ label input[type="radio"]:checked + .radio-mark {
 
 .dino-image{
   max-width: 100%;
+}
+
+/* ── Dino Details Page ───────────────────────────────────────────────────── */
+.love-language-title{
+  font-weight: bolder;
+}
+
+/* ── Omikuji ───────────────────────────────────────────────────── */
+.omikuji dt {
+  font-weight: bold;
+  margin-top: 1rem;
+}
+.omikuji dd {
+  margin: 0 0 0.8rem 1rem;
 }

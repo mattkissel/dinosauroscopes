@@ -56,9 +56,50 @@ async function loadDinoPage(url) {
     const res = await fetch(url);
     const html = await res.text();
     const bodyContent = html.match(/<body[^>]*>([\s\S]*)<\/body>/i)?.[1] ?? html;
-    document.getElementById("dino-content").innerHTML = bodyContent;
+    const container = document.getElementById("dino-content");
+    container.innerHTML = bodyContent;
+  
+
+
+    // 🧠 Infer dino name from URL
+    const dinoName = url.split("/").pop().replace(".html", "");
+    const properName = dinoName.charAt(0).toUpperCase() + dinoName.slice(1);
+    const loveKey = dinoLoveMap[properName];
+    const loveText = loveLanguages[loveKey];
+
+    // Inject love language into container
+    const loveContainer = container.querySelector("#love-language-container");
+    if (loveContainer && loveText) {
+      loveContainer.innerHTML = '<span class="love-language-title">'+loveKey+':</span> ' + loveText;
+    }
+
+
+
+
+const matches = getRomanticMatches(properName);
+const ul = container.querySelector("#romance-compatibility ul");
+ul.innerHTML = "";
+matches.forEach(({ partner, reason }) => {
+  const li = document.createElement("li");
+  li.innerHTML = `<strong>${partner}</strong>: ${reason}`;
+  ul.appendChild(li);
+});
+
+
+
+
+  
   } catch (err) {
     console.error("Failed to load dinosaur page:", err);
     document.getElementById("dino-content").innerHTML = "<p>Failed to load dino destiny.</p>";
   }
+}
+
+function getRomanticMatches(dinoName) {
+  return dinoRomancePairs
+    .filter(([a, b]) => a === dinoName || b === dinoName)
+    .map(([a, b, reason]) => {
+      const partner = a === dinoName ? b : a;
+      return { partner, reason };
+    });
 }
