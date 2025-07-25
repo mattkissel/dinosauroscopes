@@ -32,8 +32,19 @@ a.back-link:hover {
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
+/* ── Main Horoscope List ─────────────────────────────────────────── */
+.dino{
+    border: 2px #d6d0bb  solid;
+    background-color: #fdfdfd;
+    border-radius: 30px;
+    padding-bottom: 2em;
+    padding: 0 1em 2rem 1em;
+    margin-top: 1em;
+    box-shadow: 0px 0px 20px #bcb8a9;
+
+}
+
 /* ── Tabs & Buttons ─────────────────────────────────────────────── */
-/* ── Improved Tab Styling ──────────────────────────────────────── */
 .tabs {
   display: flex;
   align-items: flex-end; /* Align to bottom */

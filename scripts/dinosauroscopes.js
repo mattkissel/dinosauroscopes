@@ -74,8 +74,8 @@ function getToday() {
     div.className = "dino";
 
     const dinoId = dino.toLowerCase();
-    div.innerHTML = `
-      <h2>
+    div.innerHTML = `  
+    <h2>
         <button class="dino-link" data-url="dinosaurs/${dinoId}.html">${dino}</button>
       </h2>
       <p>${message}</p>
